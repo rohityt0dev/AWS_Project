@@ -5,11 +5,11 @@ phases:
     commands:
       - echo "Build started at `date`"
       # Move into the correct directory to ensure everything is relative
-      - cd AWS\ PROJECT/project09/portfolio-repo
+      - cd AWS\ PROJECT/project-09/portfolio-repo
       - echo "Current directory: $(pwd)"
       - ls -la
 
 artifacts:
-  base-directory: AWS PROJECT/project09/portfolio-repo
+  base-directory: AWS PROJECT/project-09/portfolio-repo
   files:
     - '**/*'
