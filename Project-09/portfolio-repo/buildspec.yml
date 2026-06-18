@@ -3,13 +3,8 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo "Build started at $(date)"
-      - mkdir -p output
-      - cp -r "AWS PROJECT/project-09/portfolio-repo/." output/
-      - echo "Files copied successfully"
-      - ls -la output
+      - echo "Deploying Website"
 
 artifacts:
-  base-directory: output
   files:
     - '**/*'
