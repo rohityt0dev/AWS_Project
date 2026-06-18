@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Build started at `date`"
+      # Move into the correct directory to ensure everything is relative
+      - cd AWS\ PROJECT/project09/portfolio-repo
+      - echo "Current directory: $(pwd)"
+      - ls -la
+
+artifacts:
+  base-directory: AWS PROJECT/project09/portfolio-repo
+  files:
+    - '**/*'
