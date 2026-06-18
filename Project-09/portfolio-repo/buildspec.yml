@@ -5,7 +5,7 @@ phases:
     commands:
       - echo "Build started at $(date)"
       - mkdir output
-      - cp -r "AWS PROJECT/project-09/portfolio-repo/"* output/
+      - cp -r "AWS_Project/project-09/portfolio-repo/"* output/
       - echo "Files copied to output directory"
       - ls -la output
 
