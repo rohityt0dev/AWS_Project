@@ -102,13 +102,7 @@ def lambda_handler(event, context):
 
 5. **Test it**
    - GET endpoints: open the Invoke URL in a browser
-   - POST endpoints: use the API Gateway "Test" tab, Postman, or `curl`
-
-```bash
-curl -X POST https://<your-invoke-url>/prod/contact \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Rohit","email":"rohityt0@gmail.com","message":"Hello AWS"}'
-```
+   - POST endpoints: use the API Gateway "Test" tab.
 
 ## Tech stack
 
@@ -116,13 +110,6 @@ curl -X POST https://<your-invoke-url>/prod/contact \
 - **AWS API Gateway** — REST API, resource/method routing
 - **JSON** — request/response payloads
 
-## Roadmap / improvements
-
-- [ ] Persist `contact-api` submissions to DynamoDB
-- [ ] Add input validation and proper error responses (4xx/5xx)
-- [ ] Migrate from console click-ops to Infrastructure as Code (Terraform / AWS SAM)
-- [ ] Add a custom domain via Route 53 + ACM
-- [ ] Add CI/CD with GitHub Actions for automated Lambda deployment
 
 ## Author
 
@@ -131,6 +118,4 @@ DevOps Engineer | AWS · Terraform · Kubernetes · Docker
 📧 rohityt0@gmail.com
 📞 +91 8208834440
 
-## License
 
-This project is open source and available for learning/portfolio purposes.
