@@ -25,3 +25,5 @@
 ## Project Outcome
 
 Successfully implemented a complete CI/CD pipeline using AWS services that automatically deploys website updates from GitHub to Amazon S3. Any code change pushed to the repository triggers the pipeline, builds the application, and deploys the latest version without manual intervention.
+
+I created it to make deployments faster and more reliable. Instead of manually uploading files every time, an automated pipeline ensures each code change is built and deployed consistently—so it reduces human errors, speeds up releases, and keeps your website always up-to-date with less effort.
