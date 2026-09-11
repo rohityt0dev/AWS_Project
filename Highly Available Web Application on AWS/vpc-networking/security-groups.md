@@ -160,7 +160,7 @@ AWS-Project-VPC
 
 ---
 
-# 🔒 Step 5 — Configure App-SG Inbound Rules
+# 🔒 Step 5 — Configure SG-ALB Inbound Rules
 
 The application servers should **not** normally accept HTTP traffic directly from the entire internet.
 
