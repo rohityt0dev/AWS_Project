@@ -17,10 +17,10 @@ Create the following Security Groups:
 ```text
 AWS-Project-VPC
 │
-├── ALB-SG
+├── SG-ALB
 │   └── Internet → ALB
 │
-└── App-SG
+└── EC2-SG
     └── ALB → Application EC2
 ```
 
@@ -32,7 +32,7 @@ Security architecture:
                          │ HTTP/HTTPS
                          ▼
                   ┌─────────────┐
-                  │    ALB-SG   │
+                  │    SG-ALB   │
                   │   Port 80   │
                   │  Port 443   │
                   └──────┬──────┘
@@ -40,7 +40,7 @@ Security architecture:
                          │ Application Traffic
                          ▼
                   ┌─────────────┐
-                  │    App-SG   │
+                  │    EC2-SG   │
                   │ Application │
                   │    Port     │
                   └──────┬──────┘
@@ -79,7 +79,7 @@ Configure:
 
 ```text
 Security group name:
-ALB-SG
+SG-ALB
 
 Description:
 Security group for Application Load Balancer
@@ -149,7 +149,7 @@ Configure:
 
 ```text
 Security group name:
-App-SG
+EC2-SG
 
 Description:
 Security group for application EC2 instances
@@ -164,7 +164,7 @@ AWS-Project-VPC
 
 The application servers should **not** normally accept HTTP traffic directly from the entire internet.
 
-Instead, allow application traffic from the **ALB-SG**.
+Instead, allow application traffic from the **SG-ALB**.
 
 For example, if the application listens on port `80`:
 
@@ -179,14 +179,14 @@ Port:
 80
 
 Source:
-ALB-SG
+SG-ALB
 ```
 
 The important part is:
 
 ```text
 Source:
-ALB-SG
+SG-ALB
 ```
 
 rather than:
@@ -370,265 +370,3 @@ EC2
 Only the required traffic reaches the application servers.
 
 ---
-
-# 🛡️ Security Group vs Network ACL
-
-Security Groups and Network ACLs are different AWS networking controls.
-
-| Feature        | Security Group         | Network ACL                |
-| -------------- | ---------------------- | -------------------------- |
-| Scope          | Resource/ENI           | Subnet                     |
-| Stateful       | ✅ Yes                  | ❌ No                       |
-| Rules          | Allow only             | Allow + Deny               |
-| Return traffic | Automatically allowed  | Must be explicitly handled |
-| Common use     | EC2/ALB access control | Subnet-level filtering     |
-
-For this project, Security Groups will provide the primary resource-level access control.
-
----
-
-# ⚠️ Important Security Rules
-
-Follow these principles:
-
-### 1. Avoid unrestricted SSH
-
-❌ Avoid:
-
-```text
-TCP :22
-0.0.0.0/0
-```
-
-Prefer:
-
-```text
-TCP :22
-YOUR_IP/32
-```
-
-or use Session Manager.
-
-### 2. Do not expose private EC2 instances directly
-
-The application EC2 instances should normally receive traffic from:
-
-```text
-ALB-SG
-```
-
-rather than:
-
-```text
-0.0.0.0/0
-```
-
-### 3. Open only required ports
-
-For example:
-
-```text
-80  → HTTP
-443 → HTTPS
-22  → SSH administration, if required
-```
-
-Do not open unnecessary ports.
-
----
-
-# 🔍 Verify Security Groups
-
-Go to:
-
-```text
-VPC
-    ↓
-Security Groups
-```
-
-Verify:
-
-### ALB-SG
-
-```text
-Name:
-ALB-SG
-
-VPC:
-AWS-Project-VPC
-
-Inbound:
-80  → 0.0.0.0/0
-443 → 0.0.0.0/0
-```
-
-### App-SG
-
-```text
-Name:
-App-SG
-
-VPC:
-AWS-Project-VPC
-
-Inbound:
-80 → ALB-SG
-22 → YOUR_IP/32
-```
-
----
-
-# 📊 Final Security Group Design
-
-```text
-┌───────────────────────────────────────────────┐
-│             AWS-Project-VPC                   │
-│                                               │
-│       🌐 Internet                             │
-│            │                                  │
-│            │ 80 / 443                        │
-│            ▼                                  │
-│       ┌───────────┐                           │
-│       │   ALB-SG  │                           │
-│       └─────┬─────┘                           │
-│             │                                 │
-│             │ 80                              │
-│             ▼                                 │
-│       ┌───────────┐                           │
-│       │   App-SG  │                           │
-│       └─────┬─────┘                           │
-│             │                                 │
-│             ▼                                 │
-│       Application EC2                         │
-│                                               │
-└───────────────────────────────────────────────┘
-```
-
----
-
-# 🏗️ Complete Network Architecture So Far
-
-After completing Steps 1–6:
-
-```text
-                             🌐 Internet
-                                  │
-                                  ▼
-                         ┌────────────────┐
-                         │ HA-WebApp-IGW  │
-                         └───────┬────────┘
-                                 │
-              ┌──────────────────┴──────────────────┐
-              │                                     │
-              ▼                                     │
-        ┌───────────┐                               │
-        │ public-RT │                               │
-        │ 0.0.0.0/0 │                               │
-        │    → IGW  │                               │
-        └─────┬─────┘                               │
-              │                                     │
-       ┌──────┴──────┐                              │
-       │             │                              │
-       ▼             ▼                              │
-   public-A      public-B                           │
-       │                                             │
-       │ NATG                                       │
-       ▼                                             │
-     NATG ◄─────────────────────────────────────────┘
-       │
-       │
-       ▼
- private-RT
-       │
- ┌─────┴──────────┐
- │                │
- ▼                ▼
-Private-App-A  Private-App-B
- │                │
- └───────┬────────┘
-         │
-         ▼
-      App EC2
-         │
-      App-SG
-         ▲
-         │
-       ALB-SG
-         ▲
-         │
-        ALB
-```
-
----
-
-# ✅ Verification Checklist
-
-### ALB-SG
-
-* [ ] `ALB-SG` created
-* [ ] Associated with `AWS-Project-VPC`
-* [ ] HTTP port `80` allowed
-* [ ] HTTPS port `443` allowed
-* [ ] Internet source configured where appropriate
-
-### App-SG
-
-* [ ] `App-SG` created
-* [ ] Associated with `AWS-Project-VPC`
-* [ ] Application port allowed from `ALB-SG`
-* [ ] SSH restricted to trusted IP if SSH is required
-* [ ] No unnecessary ports exposed
-
----
-
-# 🚀 Next Step
-
-The networking foundation is now ready:
-
-```text
-Step 1 → VPC                    ✅
-Step 2 → Subnets               ✅
-Step 3 → Internet Gateway      ✅
-Step 4 → NAT Gateway           ✅
-Step 5 → Route Tables          ✅
-Step 6 → Security Groups       ✅
-```
-
-Next, we can move to the compute and load-balancing layer:
-
-```text
-                    Application Layer
-                           │
-              ┌────────────┴────────────┐
-              │                         │
-              ▼                         ▼
-       Application Load Balancer   Target Group
-              │                         │
-              └────────────┬────────────┘
-                           │
-                           ▼
-                    EC2 / Auto Scaling
-```
-
----
-
-## 📁 GitHub File
-
-Save this documentation as:
-
-```text
-AWS-Highly-Available-Web-Application/
-│
-├── README.md
-│
-└── docs/
-    └── networking/
-        ├── vpc.md
-        ├── subnets.md
-        ├── internet-gateway.md
-        ├── nat-gateway.md
-        ├── route-tables.md
-        └── security-groups.md   ← This file
-```
-
