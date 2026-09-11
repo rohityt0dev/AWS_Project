@@ -1,1 +1,0 @@
-Highly Available Web Application
