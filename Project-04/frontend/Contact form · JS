@@ -1,0 +1,68 @@
+// Contact form -> API Gateway -> Lambda integration
+//
+// Replace the placeholder below with your real API Gateway invoke URL,
+// e.g. https://abc123xyz.execute-api.us-east-1.amazonaws.com/prod/contact
+const API_ENDPOINT = "https://your-api-id.execute-api.region.amazonaws.com/prod/contact";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const statusEl = document.getElementById("form-status");
+  const submitBtn = document.getElementById("submit-btn");
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      setStatus("Please fill in all fields.", "error");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setStatus("Please enter a valid email address.", "error");
+      return;
+    }
+
+    setStatus("Sending your message...", "pending");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with status ${response.status}`);
+      }
+
+      setStatus("Thanks! Your message has been sent. We'll get back to you soon.", "success");
+      form.reset();
+    } catch (err) {
+      console.error("Contact form submission failed:", err);
+      setStatus(
+        "Something went wrong sending your message. Please try again or email us directly.",
+        "error"
+      );
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Message";
+    }
+  });
+
+  function setStatus(text, type) {
+    statusEl.textContent = text;
+    statusEl.className = type; // "success" | "error" | "pending"
+  }
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+});

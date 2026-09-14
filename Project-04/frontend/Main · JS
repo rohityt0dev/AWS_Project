@@ -1,0 +1,20 @@
+// Shared behavior across all pages: mobile nav toggle + active link highlighting
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("nav");
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+  }
+
+  // Highlight the current page in the nav
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll("nav ul li a").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});

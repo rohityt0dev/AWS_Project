@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact Us | CloudPeak Solutions</title>
+<meta name="description" content="Get in touch with CloudPeak Solutions for AWS consulting, migration, and cloud support." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">Cloud<span>Peak</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Get In Touch</h1>
+    <p>Tell us a bit about your project. We usually reply within one business day.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <div class="contact-info">
+      <div class="item">
+        <div class="icon">📧</div>
+        <h4>Email</h4>
+        <p>hello@cloudpeak.example</p>
+      </div>
+      <div class="item">
+        <div class="icon">📞</div>
+        <h4>Phone</h4>
+        <p>+1 (555) 010-2030</p>
+      </div>
+      <div class="item">
+        <div class="icon">📍</div>
+        <h4>Office</h4>
+        <p>Remote-first, worldwide</p>
+      </div>
+    </div>
+
+    <div class="form-wrap">
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Rohit Sharma" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+        </div>
+        <button type="submit" id="submit-btn" class="btn" style="width:100%;">Send Message</button>
+        <div id="form-status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wrap">
+    <div>
+      <h4>Cloud<span style="color: var(--accent);">Peak</span> Solutions</h4>
+      <p style="max-width: 280px;">AWS cloud consulting for startups and enterprises alike.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li>hello@cloudpeak.example</li>
+        <li>+1 (555) 010-2030</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 CloudPeak Solutions. All rights reserved.</div>
+</footer>
+
+<script src="main.js"></script>
+<script src="contact-form.js"></script>
+</body>
+</html>

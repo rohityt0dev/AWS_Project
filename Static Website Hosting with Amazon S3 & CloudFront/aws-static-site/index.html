@@ -1,10 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AWS Project 1</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rohit Tambadkar - AWS Cloud Engineer Portfolio">
+  <title>Rohit Tambadkar | AWS Cloud Engineer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello AWS!</h1>
-    <p>My first AWS project.</p>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">Rohit<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <nav id="nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="eyebrow">AWS CLOUD ENGINEER • DEVOPS</p>
+          <h1>Building secure and scalable <span>AWS infrastructure.</span></h1>
+          <p class="hero-text">
+            I'm Rohit Tambadkar, an aspiring Cloud Engineer with hands-on experience
+            in AWS infrastructure, networking, security and web application deployment.
+          </p>
+          <div class="buttons">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn secondary" href="#contact">Contact Me</a>
+          </div>
+          <div class="quick-links">
+            <a href="https://github.com/rohityt0dev" target="_blank">GitHub ↗</a>
+            <a href="https://linkedin.com/in/rohit-tambadkar" target="_blank">LinkedIn ↗</a>
+            <a href="https://hashnode.com/@ron16" target="_blank">Hashnode ↗</a>
+          </div>
+        </div>
+        <div class="terminal">
+          <div class="terminal-top"><span></span><span></span><span></span></div>
+          <pre><code>$ whoami
+rohit@cloud-engineer
+
+$ aws --services
+EC2   S3   VPC   IAM
+ALB   NAT   SG   Terraform
+
+$ goal
+Build → Automate → Secure → Scale
+
+$ status
+● Open to Cloud / AWS roles</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">ABOUT ME</p>
+          <h2>Cloud-focused. Hands-on. Always learning.</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p>
+              Aspiring Cloud Engineer with practical AWS project experience in cloud
+              infrastructure, networking, security and web application deployment.
+              Currently building deeper expertise in DevOps and cloud technologies.
+            </p>
+            <p>
+              My focus is on creating reliable infrastructure using AWS services,
+              infrastructure-as-code and automation while following security and
+              least-privilege principles.
+            </p>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>3+</strong><span>AWS Projects</span></div>
+            <div class="stat"><strong>8+</strong><span>Core Technologies</span></div>
+            <div class="stat"><strong>7.14</strong><span>Engineering CGPA</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section alt">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">TECHNICAL SKILLS</p>
+          <h2>Tools I work with</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card"><div class="icon">☁</div><h3>AWS</h3><p>EC2, S3, IAM, VPC, Security Groups, ALB, NAT Gateway</p></div>
+          <div class="skill-card"><div class="icon">⌘</div><h3>IaC & Automation</h3><p>Terraform and infrastructure automation</p></div>
+          <div class="skill-card"><div class="icon">◈</div><h3>Containers</h3><p>Docker and Kubernetes fundamentals</p></div>
+          <div class="skill-card"><div class="icon">▣</div><h3>Operating Systems</h3><p>Linux and Windows</p></div>
+          <div class="skill-card"><div class="icon">⑂</div><h3>Version Control</h3><p>Git and GitHub</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">FEATURED PROJECTS</p>
+          <h2>AWS projects built for real-world scenarios</h2>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-number">01</div>
+            <h3>High Availability Web App</h3>
+            <p class="stack">EC2 · ALB · Apache · Amazon Linux 2 · Security Groups</p>
+            <p>
+              Deployed a web application across two EC2 instances behind an
+              Application Load Balancer with target groups and health checks.
+            </p>
+            <ul>
+              <li>Round-robin traffic distribution</li>
+              <li>Automatic routing away from unhealthy instances</li>
+              <li>Least-privilege inbound security rules</li>
+            </ul>
+            <a href="https://github.com/rohityt0dev/AWSproject" target="_blank" class="project-link">View on GitHub →</a>
+          </article>
+
+          <article class="project-card featured">
+            <div class="project-number">02</div>
+            <h3>Static Website Hosting</h3>
+            <p class="stack">S3 · Bucket Policy · IAM · Static Website Hosting</p>
+            <p>
+              Hosted a static website on Amazon S3 and configured public object
+              access, index/error documents and a least-privilege bucket policy.
+            </p>
+            <ul>
+              <li>Configured S3 static website hosting</li>
+              <li>Created JSON bucket policy for s3:GetObject</li>
+              <li>Configured index and error document routing</li>
+            </ul>
+            <a href="https://github.com/rohityt0dev/AWSproject" target="_blank" class="project-link">View on GitHub →</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-number">03</div>
+            <h3>Secure VPC Architecture</h3>
+            <p class="stack">VPC · EC2 · IGW · NAT Gateway · Route Tables · Bastion</p>
+            <p>
+              Designed a multi-tier VPC using public and private subnets,
+              Internet Gateway, NAT Gateway and a Bastion Host pattern.
+            </p>
+            <ul>
+              <li>VPC CIDR: 10.0.0.0/16</li>
+              <li>Public/private network segmentation</li>
+              <li>Controlled SSH access to private instances</li>
+            </ul>
+            <a href="https://github.com/rohityt0dev/AWSproject" target="_blank" class="project-link">View on GitHub →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <p class="eyebrow">LET'S CONNECT</p>
+        <h2>Looking for an opportunity to grow as a Cloud Engineer.</h2>
+        <a class="btn primary" href="mailto:rohityt0@gmail.com">Email Me</a>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="container contact-grid">
+        <div>
+          <p class="eyebrow">CONTACT</p>
+          <h2>Have an opportunity?</h2>
+          <p>I'd be happy to discuss AWS Cloud, DevOps and entry-level Cloud Engineer opportunities.</p>
+        </div>
+        <div class="contact-list">
+          <a href="mailto:rohityt0@gmail.com"><span>Email</span> rohityt0@gmail.com</a>
+          <a href="tel:+918208834440"><span>Phone</span> +91 8208834440</a>
+          <a href="https://linkedin.com/in/rohit-tambadkar" target="_blank"><span>LinkedIn</span> rohit-tambadkar</a>
+          <a href="https://github.com/rohityt0dev" target="_blank"><span>GitHub</span> rohityt0dev</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Rohit Tambadkar</span>
+      <span>AWS Cloud Engineer Portfolio</span>
+    </div>
+  </footer>
+
+  <button id="topBtn" class="top-btn" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
 </body>
 </html>
